@@ -1,0 +1,11 @@
+{
+  "name": "olcpixelnovelengine",
+  "version-string": "0.0.1",
+  "dependencies": [
+    "entt",
+    "freetype",
+    "luajit",
+    "sol2",
+    "yaml-cpp"
+  ]
+}

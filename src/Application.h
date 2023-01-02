@@ -1,18 +1,27 @@
 #pragma once
 
+// Submodules
 #include "olcPixelGameEngine/olcPixelGameEngine.h"
 
-class Application : public olc::PixelGameEngine
+// Internals
+#include "ConfigData.h"
+#include "Event.h"
+#include "FSM.h"
+#include "GUI.h"
+#include "Lua.h"
+
+class Application : public olc::PixelGameEngine, Event::Listener
 {
 private:
 	static Application* m_singleton;
 	Application();
 protected:
-	//Config::ConfigData m_config;
+	Config::ConfigData m_config;
 
-	//Event::Handler& m_event_handler;
-	//GUI::Manager& m_gui_manager;
-	//FSM::Machine m_state_machine;
+	Event::Handler& m_event_handler;
+	FSM::Machine m_state_machine;
+	GUI::Manager& m_gui_manager;
+	Lua::Engine& m_lua_engine;
 	std::map<uint32_t, std::function<void(int)>> m_key_bindings;
 
 	uint8_t m_game_layer;
@@ -24,19 +33,19 @@ protected:
 public:
 	~Application();
 
-	static Application& GetInstance();
+	static inline Application& GetInstance() { if (!m_singleton) m_singleton = new Application; return *m_singleton; }
 	static void Destroy();
 
 	static uint8_t CutsceneLayer();
 	static uint8_t GUILayer();
 	static uint8_t GameLayer();
 
-	//static Config::ConfigData& Config();
-	//static FSM::State* CurrentState();
+	static Config::ConfigData& Config();
+	static FSM::State* CurrentState();
 
-	//virtual void OnEventImmediate(Event::Event* event) override;
+	virtual void OnEventImmediate(Event::Event* event) override;
 
-	//void Construct(Config::ConfigData& config);
+	void Construct(Config::ConfigData& config);
 	virtual bool OnUserCreate() override;
 	virtual bool OnUserUpdate(float fElapsedTime) override;
 	virtual bool OnUserDestroy() override;

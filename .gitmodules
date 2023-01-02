@@ -1,3 +1,12 @@
 [submodule "submodules/olcPixelGameEngine"]
 	path = submodules/olcPixelGameEngine
 	url = https://github.com/sigmareaver/olcPixelGameEngine.git
+[submodule "submodules/md4c"]
+	path = submodules/md4c
+	url = https://github.com/sigmareaver/md4c.git
+[submodule "submodules/imgui_md"]
+	path = submodules/imgui_md
+	url = https://github.com/sigmareaver/imgui_md.git
+[submodule "submodules/stb"]
+	path = submodules/stb
+	url = https://github.com/sigmareaver/stb.git
